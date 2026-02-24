@@ -55,9 +55,9 @@ function cellClickHandler(row, col) {
         alert("Победила дружба");
     }
 
-    if (calcWinner(table)){
-        alertWinner(move);
-    }
+    let who = calcWinner(table);
+    if (who !== -1)
+        alertWinner(who);
 
     /* Пользоваться методом для размещения символа в клетке так:
         renderSymbolInCell(ZERO, row, col);
@@ -65,10 +65,90 @@ function cellClickHandler(row, col) {
 }
 
 function calcWinner(table) {
-    return true;
+    for (let row = 0; row < table.length; row++) {
+        let winArr = []
+        let cross_win = true;
+        let zero_win = true
+        for (let col = 0; col < table.length; col++) {
+            if (table[row][col] == 0) {
+                cross_win = false
+            } else {
+                zero_win = false
+            }
+            winArr.push([row, col])
+        }
+        if (zero_win) {
+            return 0;
+        } else if (cross_win) {
+            return 1;
+        } else {
+            winArr = []
+        }
+    }
+
+    for (let row = 0; row < table.length; row++) {
+        let winArr = []
+        let cross_win = true;
+        let zero_win = true
+        for (let col = 0; col < table.length; col++) {
+            if (table[col][row] == 0) {
+                cross_win = false
+            } else {
+                zero_win = false
+            }
+            winArr.push([row, col])
+        }
+        if (zero_win) {
+            return 0;
+        } else if (cross_win) {
+            return 1;
+        } else {
+            winArr = []
+        }
+    }
+
+    let winArr = []
+    let cross_win = true;
+    let zero_win = true
+    for (let i = 0; i < table.length; i++) {
+        if (table[i][i] == 0) {
+            cross_win = false
+        } else {
+            zero_win = false
+        }
+        winArr.push([row, col])
+    }
+    if (zero_win) {
+        return 0;
+    } else if (cross_win) {
+        return 1;
+    } else {
+        winArr = []
+    }
+
+    winArr = []
+    cross_win = true;
+    zero_win = true
+    for (let i = 0; i < table.length; i++) {
+        if (table[2 - i][2 - i] == 0) {
+            cross_win = false
+        } else {
+            zero_win = false
+        }
+        winArr.push([row, col])
+    }
+    if (zero_win) {
+        return 0;
+    } else if (cross_win) {
+        return 1;
+    } else {
+        winArr = []
+    }
+
+    return -1;
 }
 
-function alertWinner(move){
+function alertWinner(move) {
     alert(`победили ${move}`)
 }
 
