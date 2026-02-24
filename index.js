@@ -67,19 +67,19 @@ function cellClickHandler(row, col) {
 function calcWinner(table) {
     for (let row = 0; row < table.length; row++) {
         let winArr = []
-        let cross_win = true;
-        let zero_win = true
+        let cross_win = 0;
+        let zero_win = 0
         for (let col = 0; col < table.length; col++) {
             if (table[row][col] == 0) {
-                cross_win = false
-            } else {
-                zero_win = false
+                zero_win++;
+            } else if (table[row][col] == 1) {
+                cross_win++;
             }
             winArr.push([row, col])
         }
-        if (zero_win) {
+        if (zero_win === 3) {
             return 0;
-        } else if (cross_win) {
+        } else if (cross_win === 3) {
             return 1;
         } else {
             winArr = []
@@ -88,58 +88,58 @@ function calcWinner(table) {
 
     for (let row = 0; row < table.length; row++) {
         let winArr = []
-        let cross_win = true;
-        let zero_win = true
+        let cross_win = 0;
+        let zero_win = 0
         for (let col = 0; col < table.length; col++) {
             if (table[col][row] == 0) {
-                cross_win = false
-            } else {
-                zero_win = false
+                zero_win++;
+            } else if (table[col][row] == 1) {
+                cross_win++;
             }
             winArr.push([row, col])
         }
-        if (zero_win) {
+        if (zero_win === 3) {
             return 0;
-        } else if (cross_win) {
+        } else if (cross_win === 3) {
             return 1;
         } else {
             winArr = []
         }
     }
-
+    //
     let winArr = []
-    let cross_win = true;
-    let zero_win = true
+    let cross_win = 0;
+    let zero_win = 0
     for (let i = 0; i < table.length; i++) {
         if (table[i][i] == 0) {
-            cross_win = false
-        } else {
-            zero_win = false
+            zero_win++;
+        } else if (table[i][i] == 1) {
+            cross_win++;
         }
-        winArr.push([row, col])
+        winArr.push([i, i])
     }
-    if (zero_win) {
+    if (zero_win === 3) {
         return 0;
-    } else if (cross_win) {
+    } else if (cross_win === 3) {
         return 1;
     } else {
         winArr = []
     }
-
+    //
     winArr = []
-    cross_win = true;
-    zero_win = true
+    cross_win = 0;
+    zero_win = 0
     for (let i = 0; i < table.length; i++) {
-        if (table[2 - i][2 - i] == 0) {
-            cross_win = false
-        } else {
-            zero_win = false
+        if (table[i][2 - i] == 0) {
+            zero_win++;
+        } else if (table[i][2 - i] == 1) {
+            cross_win++;
         }
-        winArr.push([row, col])
+        winArr.push([i, 2 - i])
     }
-    if (zero_win) {
+    if (zero_win === 3) {
         return 0;
-    } else if (cross_win) {
+    } else if (cross_win === 3) {
         return 1;
     } else {
         winArr = []
