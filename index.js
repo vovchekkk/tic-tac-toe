@@ -193,6 +193,8 @@ function resetClickHandler() {
         for (let col = 0; col < table[row].length; col++) {
             table[row][col] = -1;
             renderSymbolInCell(EMPTY, row, col);
+            const cell = findCell(row, col);
+            cell.style.background = "yellow";
         }
     }
     console.log('reset!');
