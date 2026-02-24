@@ -4,6 +4,7 @@ const EMPTY = ' ';
 
 const container = document.getElementById('fieldWrapper');
 
+const table = [[]]
 startGame();
 addResetListener();
 
@@ -21,6 +22,7 @@ function renderGrid(dimension) {
             cell.textContent = EMPTY;
             cell.addEventListener('click', () => cellClickHandler(i, j));
             row.appendChild(cell);
+            table[i][j] = ' ';
         }
         container.appendChild(row);
     }
