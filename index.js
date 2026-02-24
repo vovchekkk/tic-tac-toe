@@ -55,14 +55,14 @@ function cellClickHandler(row, col) {
     renderSymbolInCell(move, row, col);
     console.log(`Clicked on cell: ${row}, ${col}`);
 
-    if (moveCounter === 9) {
-        alert("Победила дружба");
-    }
-
     let who = calcWinner(table);
     if (who !== -1) {
         win_is_there = true;
         alertWinner(who);
+        return;
+    }
+    if (moveCounter === 9) {
+        alert("Победила дружба");
     }
 
     /* Пользоваться методом для размещения символа в клетке так:
@@ -155,7 +155,10 @@ function calcWinner(table) {
 }
 
 function alertWinner(move) {
-    alert(`победили ${move}`)
+    if (move == 0)
+        alert(`победили нолики`);
+    else if (move == 1)
+        alert(`победили крестики`);
 }
 
 function renderSymbolInCell(symbol, row, col, color = '#333') {
