@@ -3,7 +3,7 @@ const ZERO = 'O';
 const EMPTY = ' ';
 
 const container = document.getElementById('fieldWrapper');
-const table = [[]];
+const table = [[]]
 startGame();
 addResetListener();
 
@@ -33,7 +33,11 @@ let moveCounter = 0;
 
 let prevMove = ZERO;
 
+let win_is_there = false;
+
 function cellClickHandler(row, col) {
+    if (win_is_there === true)
+        return;
     if (table[row][col] !== -1)
         return;
     let move;
@@ -57,6 +61,7 @@ function cellClickHandler(row, col) {
 
     let resultArr = calcWinner(table);
     if (resultArr[0] !== -1) {
+        win_is_there = true;
         drawWinnerCells(resultArr[1]);
         alertWinner(resultArr[0]);
     }
@@ -177,6 +182,15 @@ function addResetListener() {
 }
 
 function resetClickHandler() {
+    moveCounter = 0;
+    prevMove = ZERO;
+    win_is_there = false;
+    for (let row = 0; row < table.length; row++) {
+        for (let col = 0; col < table[row].length; col++) {
+            table[row][col] = -1;
+            renderSymbolInCell(EMPTY, row, col);
+        }
+    }
     console.log('reset!');
 }
 
