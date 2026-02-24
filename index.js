@@ -33,7 +33,11 @@ let moveCounter = 0;
 
 let prevMove = ZERO;
 
+let win_is_there = false;
+
 function cellClickHandler(row, col) {
+    if (win_is_there === true)
+        return;
     if (table[row][col] !== -1)
         return;
     let move;
@@ -56,8 +60,10 @@ function cellClickHandler(row, col) {
     }
 
     let who = calcWinner(table);
-    if (who !== -1)
+    if (who !== -1) {
+        win_is_there = true;
         alertWinner(who);
+    }
 
     /* Пользоваться методом для размещения символа в клетке так:
         renderSymbolInCell(ZERO, row, col);
@@ -170,6 +176,15 @@ function addResetListener() {
 }
 
 function resetClickHandler() {
+    moveCounter = 0;
+    prevMove = ZERO;
+    win_is_there = false;
+    for (let row = 0; row < table.length; row++) {
+        for (let col = 0; col < table[row].length; col++) {
+            table[row][col] = -1;
+            renderSymbolInCell(EMPTY, row, col);
+        }
+    }
     console.log('reset!');
 }
 
