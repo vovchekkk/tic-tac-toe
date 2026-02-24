@@ -54,9 +54,21 @@ function cellClickHandler(row, col) {
         alert("Победила дружба");
     }
 
+    if (calcWinner(table)){
+        alertWinner(move);
+    }
+
     /* Пользоваться методом для размещения символа в клетке так:
         renderSymbolInCell(ZERO, row, col);
      */
+}
+
+function calcWinner(table) {
+    return true;
+}
+
+function alertWinner(move){
+    alert(`победили ${move}`)
 }
 
 function renderSymbolInCell(symbol, row, col, color = '#333') {
