@@ -3,8 +3,7 @@ const ZERO = 'O';
 const EMPTY = ' ';
 
 const container = document.getElementById('fieldWrapper');
-
-const table = [[]];
+const table = [[]]
 startGame();
 addResetListener();
 
@@ -25,7 +24,7 @@ function renderGrid(dimension) {
             row.appendChild(cell);
             rowTable.push(-1);
         }
-        table.push(rowTable);
+        table[i] = rowTable;
         container.appendChild(row);
     }
 }
@@ -35,6 +34,8 @@ let moveCounter = 0;
 let prevMove = ZERO;
 
 function cellClickHandler(row, col) {
+    if (table[row][col] !== -1)
+        return;
     let move;
     if (prevMove === CROSS) {
         move = ZERO;
