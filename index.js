@@ -4,7 +4,7 @@ const EMPTY = ' ';
 
 const container = document.getElementById('fieldWrapper');
 
-const table = [[]]
+const table = [[]];
 startGame();
 addResetListener();
 
@@ -17,13 +17,15 @@ function renderGrid(dimension) {
 
     for (let i = 0; i < dimension; i++) {
         const row = document.createElement('tr');
+        const rowTable = [];
         for (let j = 0; j < dimension; j++) {
             const cell = document.createElement('td');
             cell.textContent = EMPTY;
             cell.addEventListener('click', () => cellClickHandler(i, j));
             row.appendChild(cell);
-            table[i][j] = ' ';
+            rowTable.push(-1);
         }
+        table.push(rowTable);
         container.appendChild(row);
     }
 }
@@ -33,11 +35,13 @@ let moveCounter = 0;
 let prevMove = ZERO;
 
 function cellClickHandler(row, col) {
-    let move = ZERO;
+    let move;
     if (prevMove === CROSS) {
         move = ZERO;
+        table[row][col] = 0;
     } else {
-        move = CROSS
+        move = CROSS;
+        table[row][col] = 1;
     }
     prevMove = move;
 
@@ -46,8 +50,8 @@ function cellClickHandler(row, col) {
     renderSymbolInCell(move, row, col);
     console.log(`Clicked on cell: ${row}, ${col}`);
 
-    if (moveCounter == 9) {
-        alert("Победила дружба")
+    if (moveCounter === 9) {
+        alert("Победила дружба");
     }
 
     /* Пользоваться методом для размещения символа в клетке так:
