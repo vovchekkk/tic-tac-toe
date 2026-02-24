@@ -104,7 +104,7 @@ function calcWinner(table) {
             } else if (table[col][row] === 1) {
                 cross_win++;
             }
-            winArr.push([row, col]);
+            winArr.push([col, row]);
         }
         if (zero_win === 3) {
             return [0, winArr];
