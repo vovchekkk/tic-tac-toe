@@ -28,6 +28,8 @@ function renderGrid(dimension) {
     }
 }
 
+let moveCounter = 0;
+
 let prevMove = ZERO;
 
 function cellClickHandler(row, col) {
@@ -38,10 +40,15 @@ function cellClickHandler(row, col) {
         move = CROSS
     }
     prevMove = move;
-    
+
+    moveCounter++;
+
     renderSymbolInCell(move, row, col);
     console.log(`Clicked on cell: ${row}, ${col}`);
 
+    if (moveCounter == 9) {
+        alert("Победила дружба")
+    }
 
     /* Пользоваться методом для размещения символа в клетке так:
         renderSymbolInCell(ZERO, row, col);
